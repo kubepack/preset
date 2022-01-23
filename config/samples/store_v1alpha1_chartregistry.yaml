@@ -1,0 +1,6 @@
+apiVersion: store.x-helm.dev/v1alpha1
+kind: ChartRegistry
+metadata:
+  name: chartregistry-sample
+spec:
+  # TODO(user): Add fields here

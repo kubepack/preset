@@ -1,0 +1,20 @@
+# permissions for end users to view clusterchartpresets.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: clusterchartpreset-viewer-role
+rules:
+- apiGroups:
+  - charts.x-helm.dev
+  resources:
+  - clusterchartpresets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - charts.x-helm.dev
+  resources:
+  - clusterchartpresets/status
+  verbs:
+  - get

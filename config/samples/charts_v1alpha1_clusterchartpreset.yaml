@@ -1,0 +1,6 @@
+apiVersion: charts.x-helm.dev/v1alpha1
+kind: ClusterChartPreset
+metadata:
+  name: clusterchartpreset-sample
+spec:
+  # TODO(user): Add fields here

@@ -1,0 +1,37 @@
+domain: x-helm.dev
+layout:
+- go.kubebuilder.io/v3
+multigroup: true
+projectName: preset
+repo: kubepack.dev/preset
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: x-helm.dev
+  group: charts
+  kind: ChartPreset
+  path: kubepack.dev/preset/apis/charts/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+  domain: x-helm.dev
+  group: charts
+  kind: VendorChartPreset
+  path: kubepack.dev/preset/apis/charts/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+  domain: x-helm.dev
+  group: charts
+  kind: ClusterChartPreset
+  path: kubepack.dev/preset/apis/charts/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+  domain: x-helm.dev
+  group: store
+  kind: ChartRegistry
+  path: kubepack.dev/preset/apis/store/v1alpha1
+  version: v1alpha1
+version: "3"

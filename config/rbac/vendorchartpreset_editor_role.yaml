@@ -1,0 +1,24 @@
+# permissions for end users to edit vendorchartpresets.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: vendorchartpreset-editor-role
+rules:
+- apiGroups:
+  - charts.x-helm.dev
+  resources:
+  - vendorchartpresets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - charts.x-helm.dev
+  resources:
+  - vendorchartpresets/status
+  verbs:
+  - get

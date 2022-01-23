@@ -1,0 +1,24 @@
+# permissions for end users to edit clusterchartpresets.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: clusterchartpreset-editor-role
+rules:
+- apiGroups:
+  - charts.x-helm.dev
+  resources:
+  - clusterchartpresets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - charts.x-helm.dev
+  resources:
+  - clusterchartpresets/status
+  verbs:
+  - get

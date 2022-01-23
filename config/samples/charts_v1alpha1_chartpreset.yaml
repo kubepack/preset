@@ -1,0 +1,6 @@
+apiVersion: charts.x-helm.dev/v1alpha1
+kind: ChartPreset
+metadata:
+  name: chartpreset-sample
+spec:
+  # TODO(user): Add fields here

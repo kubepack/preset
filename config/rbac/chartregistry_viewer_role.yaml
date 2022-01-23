@@ -1,0 +1,20 @@
+# permissions for end users to view chartregistries.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: chartregistry-viewer-role
+rules:
+- apiGroups:
+  - store.x-helm.dev
+  resources:
+  - chartregistries
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - store.x-helm.dev
+  resources:
+  - chartregistries/status
+  verbs:
+  - get

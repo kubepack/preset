@@ -1,0 +1,24 @@
+# permissions for end users to edit chartregistries.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: chartregistry-editor-role
+rules:
+- apiGroups:
+  - store.x-helm.dev
+  resources:
+  - chartregistries
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - store.x-helm.dev
+  resources:
+  - chartregistries/status
+  verbs:
+  - get
