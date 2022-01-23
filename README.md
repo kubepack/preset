@@ -13,10 +13,12 @@
 
 ## Test Examples
 
-```
+```bash
 > k apply -f config/crd/bases/
-customresourcedefinition.apiextensions.k8s.io/clusterpresets.charts.x-helm.dev created
-customresourcedefinition.apiextensions.k8s.io/presets.charts.x-helm.dev created
+customresourcedefinition.apiextensions.k8s.io/chartpresets.charts.x-helm.dev created
+customresourcedefinition.apiextensions.k8s.io/clusterchartpresets.charts.x-helm.dev created
+customresourcedefinition.apiextensions.k8s.io/vendorchartpresets.charts.x-helm.dev created
+customresourcedefinition.apiextensions.k8s.io/chartregistries.store.x-helm.dev created
 
 # Test charts are available in: https://github.com/kubepack/chartpreset-testdata
 
