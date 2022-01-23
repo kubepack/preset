@@ -10,3 +10,24 @@
 > kubebuilder create api --group charts --version v1alpha1 --kind ClusterChartPreset --namespaced=false
 > kubebuilder create api --group store --version v1alpha1 --kind ChartRegistry --namespaced=false
 ```
+
+## Test Examples
+
+```
+> k apply -f config/crd/bases/
+customresourcedefinition.apiextensions.k8s.io/clusterpresets.charts.x-helm.dev created
+customresourcedefinition.apiextensions.k8s.io/presets.charts.x-helm.dev created
+
+# Test charts are available in: https://github.com/kubepack/chartpreset-testdata
+
+> k apply -f cd ../chartpreset-testdata/charts/hello/presets/
+custerchartpreset.charts.x-helm.dev/ha-deployment created
+custerchartpreset.charts.x-helm.dev/nodeport-service created
+custerchartpreset.charts.x-helm.dev/unified created
+
+> k get clusterpresets
+NAME               AGE
+ha-deployment      8s
+nodeport-service   8s
+unified            8s
+```

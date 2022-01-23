@@ -18,24 +18,21 @@ package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	kmapi "kmodules.xyz/client-go/api/v1"
+	"kmodules.xyz/client-go/apiextensions"
+	"kubepack.dev/preset/crds"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+const (
+	ResourceKindPreset      = "ChartRegistry"
+	ResourceChartRegistry   = "chartregistry"
+	ResourceChartRegistries = "chartregistries"
+)
 
 // ChartRegistrySpec defines the desired state of ChartRegistry
 type ChartRegistrySpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-
-	// Foo is an example field of ChartRegistry. Edit chartregistry_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
-}
-
-// ChartRegistryStatus defines the observed state of ChartRegistry
-type ChartRegistryStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	URL       string                 `json:"url"`
+	SecretRef *kmapi.ObjectReference `json:"secretRef"`
 }
 
 //+kubebuilder:object:root=true
@@ -47,8 +44,7 @@ type ChartRegistry struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   ChartRegistrySpec   `json:"spec,omitempty"`
-	Status ChartRegistryStatus `json:"status,omitempty"`
+	Spec ChartRegistrySpec `json:"spec,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -62,4 +58,8 @@ type ChartRegistryList struct {
 
 func init() {
 	SchemeBuilder.Register(&ChartRegistry{}, &ChartRegistryList{})
+}
+
+func (_ ChartRegistry) CustomResourceDefinition() *apiextensions.CustomResourceDefinition {
+	return crds.MustCustomResourceDefinition(GroupVersion.WithResource(ResourceChartRegistries))
 }

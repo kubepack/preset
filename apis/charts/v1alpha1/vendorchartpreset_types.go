@@ -17,25 +17,34 @@ limitations under the License.
 package v1alpha1
 
 import (
+	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	"kmodules.xyz/client-go/apiextensions"
+	"kubepack.dev/preset/crds"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+const (
+	ResourceKindVendorChartPreset = "VendorChartPreset"
+	ResourceVendorChartPreset     = "vendorchartpreset"
+	ResourceVendorChartPresets    = "vendorchartpresets"
+)
 
 // VendorChartPresetSpec defines the desired state of VendorChartPreset
 type VendorChartPresetSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// selector is a label query over pods that should match the replica count.
+	// It must match the pod template's labels.
+	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+	//
+	// +optional
+	Selector *metav1.LabelSelector `json:"selector,omitempty"`
 
-	// Foo is an example field of VendorChartPreset. Edit vendorchartpreset_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
-}
+	// +optional
+	UsePresets []core.LocalObjectReference `json:"usePresets,omitempty"`
 
-// VendorChartPresetStatus defines the observed state of VendorChartPreset
-type VendorChartPresetStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// +optional
+	// +kubebuilder:pruning:PreserveUnknownFields
+	Values *runtime.RawExtension `json:"values,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -47,8 +56,7 @@ type VendorChartPreset struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   VendorChartPresetSpec   `json:"spec,omitempty"`
-	Status VendorChartPresetStatus `json:"status,omitempty"`
+	Spec VendorChartPresetSpec `json:"spec,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -62,4 +70,8 @@ type VendorChartPresetList struct {
 
 func init() {
 	SchemeBuilder.Register(&VendorChartPreset{}, &VendorChartPresetList{})
+}
+
+func (_ VendorChartPreset) CustomResourceDefinition() *apiextensions.CustomResourceDefinition {
+	return crds.MustCustomResourceDefinition(GroupVersion.WithResource(ResourceVendorChartPresets))
 }
